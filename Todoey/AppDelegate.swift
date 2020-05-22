@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Todoey
-//
-//  Created by Philipp Muellauer on 26/11/2019.
-//  Copyright © 2019 Philipp Muellauer. All rights reserved.
-//
 
 import UIKit
 import RealmSwift
@@ -21,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             let realm = try Realm()
         } catch {
-            print("Error initialising new realm, \(error)")
+            print("realm 초기화 에러, \(error)")
         }
         
         

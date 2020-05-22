@@ -1,9 +1,3 @@
-//  ViewController.swift
-//  Todoey
-//
-//  Created by Philipp Muellauer on 26/11/2019.
-//  Copyright © 2019 Philipp Muellauer. All rights reserved.
-//
 
 import UIKit
 import RealmSwift
@@ -30,11 +24,10 @@ class TodoListViewController: SwipeTableViewController {
         
         if let colourHex = selectedCategory?.colour {
             title = selectedCategory!.name
-            guard let navBar = navigationController?.navigationBar else { fatalError("Navigation controller does not exist.")
+            guard let navBar = navigationController?.navigationBar else { fatalError("네비게이션 컨트롤러 존재하지 않음.")
             }
             if let navBarColour = UIColor(hexString: colourHex) {
-                //Original setting: navBar.barTintColor = UIColor(hexString: colourHex)
-                //Revised for iOS13 w/ Prefer Large Titles setting:
+                
                 navBar.backgroundColor = navBarColour
                 navBar.tintColor = ContrastColorOf(navBarColour, returnFlat: true)
                 searchBar.barTintColor = navBarColour
@@ -58,7 +51,7 @@ class TodoListViewController: SwipeTableViewController {
             }
             cell.accessoryType = item.done ? .checkmark : .none
         } else {
-            cell.textLabel?.text = "No Items Added"
+            cell.textLabel?.text = "리스트가 추가 되지 않았습니다."
         }
         
         return cell
@@ -74,7 +67,7 @@ class TodoListViewController: SwipeTableViewController {
                     item.done = !item.done
                 }
             } catch {
-                print("Error saving done status, \(error)")
+                print("체크마크 저장 실패, \(error)")
             }
         }
         
@@ -85,8 +78,8 @@ class TodoListViewController: SwipeTableViewController {
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
-        let alert = UIAlertController(title: "Add New Todoey Item", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+        let alert = UIAlertController(title: "새 리스트 추가", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "리스트 추가", style: .default) { (action) in
             if let currentCategory = self.selectedCategory {
                 do {
                     try self.realm.write {
@@ -96,13 +89,13 @@ class TodoListViewController: SwipeTableViewController {
                         currentCategory.items.append(newItem)
                     }
                 } catch {
-                    print("Error saving new items, \(error)")
+                    print("새로운 리스트 생성 실패, \(error)")
                 }
             }
             self.tableView.reloadData()
         }
         alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Create new item"
+            alertTextField.placeholder = "리스트를 생성 하세요."
             textField = alertTextField
         }
         alert.addAction(action)
@@ -122,7 +115,7 @@ class TodoListViewController: SwipeTableViewController {
                     realm.delete(item)
                 }
             } catch {
-                print("Error deleting item, \(error)")
+                print("리스트 삭제 에러, \(error)")
             }
         }
     }

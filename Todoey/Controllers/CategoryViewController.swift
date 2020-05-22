@@ -1,9 +1,3 @@
-//
-//  CategoryViewController.swift
-//  Todoey
-//
-//  Created by Philipp Muellauer on 28/11/2019.
-//  Copyright © 2019 Philipp Muellauer. All rights reserved.
 
 import UIKit
 import RealmSwift
@@ -13,8 +7,6 @@ class CategoryViewController: SwipeTableViewController {
     
     let realm = try! Realm()
     
-    // Potential namespace clash with OpaquePointer (same name of Category)
-    // Use correct type from dropdown or add backticks to fix e.g., var categories = [`Category`]()
     var categories: Results<Category>?
     
     override func viewDidLoad() {
@@ -25,7 +17,7 @@ class CategoryViewController: SwipeTableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        guard let navBar = navigationController?.navigationBar else { fatalError("Navigation controller does not exist.")
+        guard let navBar = navigationController?.navigationBar else { fatalError("네비게이션 컨트롤러가 존재하지 않습니다.")
         }
         navBar.backgroundColor = UIColor(hexString: "#1D9BF6")
     }
@@ -38,7 +30,7 @@ class CategoryViewController: SwipeTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories added yet"
+        cell.textLabel?.text = categories?[indexPath.row].name ?? "카테고리가 없습니다."
         
         if let category = categories?[indexPath.row] {
             guard let categoryColour = UIColor(hexString: category.colour) else {fatalError()}
@@ -56,7 +48,7 @@ class CategoryViewController: SwipeTableViewController {
                 realm.add(category)
             }
         } catch {
-            print("Error saving category \(error)")
+            print("카테고리 저장 실패 \(error)")
         }
         tableView.reloadData()
     }
@@ -75,7 +67,7 @@ class CategoryViewController: SwipeTableViewController {
                     self.realm.delete(categoryForDeletion)
                 }
             } catch {
-                print("Error deleting category, \(error)")
+                print("카테고리 삭제 실패, \(error)")
             }
         }
     }
@@ -84,8 +76,8 @@ class CategoryViewController: SwipeTableViewController {
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
-        let alert = UIAlertController(title: "Add a New Cateogry", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add", style: .default) { (action) in
+        let alert = UIAlertController(title: "카테고리 추가", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "추가", style: .default) { (action) in
             let newCategory = Category()
             newCategory.name = textField.text!
             newCategory.colour = UIColor.randomFlat().hexValue()
@@ -95,7 +87,7 @@ class CategoryViewController: SwipeTableViewController {
         alert.addAction(action)
         alert.addTextField { (field) in
             textField = field
-            textField.placeholder = "Add a new category"
+            textField.placeholder = "새로운 카테고리 추가"
         }
         present(alert, animated: true, completion: nil)
     }

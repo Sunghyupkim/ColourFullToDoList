@@ -1,14 +1,6 @@
-//
-//  SwipeTableViewController.swift
-//  Todoey
-//
-//  Created by Philipp Muellauer on 29/11/2019.
-//  Copyright © 2019 Philipp Muellauer. All rights reserved.
-//
 
 import UIKit
 import SwipeCellKit
-//import RealmSwift
 
 class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegate {
     
@@ -37,7 +29,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             
         }
         
-        // customize the action appearance
+        // 스와이프 삭제 액션 이미지 삽입
         deleteAction.image = UIImage(named: "delete-icon")
         
         return [deleteAction]
@@ -52,7 +44,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     }
     
     func updateModel(at indexPath: IndexPath) {
-        // Update our data model
+        // 데이터 모델 업데이트
     }
     
     
