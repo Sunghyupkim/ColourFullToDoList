@@ -41,7 +41,7 @@ class CategoryViewController: SwipeTableViewController {
     }
     
     
-    //Mark: - Data Manipulation Methods
+    //Mark: - 데이터 컨트롤 Methods
     func save(category: Category) {
         do {
             try realm.write {
@@ -59,7 +59,7 @@ class CategoryViewController: SwipeTableViewController {
         tableView.reloadData()
     }
     
-    //Mark: - Delete Data from Swipe
+    //Mark: - 스와이프 데이터 삭제
     override func updateModel(at indexPath: IndexPath) {
         if let categoryForDeletion = self.categories?[indexPath.row] {
             do {
@@ -72,7 +72,7 @@ class CategoryViewController: SwipeTableViewController {
         }
     }
     
-    //Mark: - Add New Categories
+    //Mark: - 새로운 카테고리 추가
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()

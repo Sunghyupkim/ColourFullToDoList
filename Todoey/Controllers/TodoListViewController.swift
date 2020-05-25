@@ -102,7 +102,7 @@ class TodoListViewController: SwipeTableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    //Mark - Model Manipulation Methods
+    //Mark - 모델 컨트롤 Methods
     func loadItems() {
         toDoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
         tableView.reloadData()
