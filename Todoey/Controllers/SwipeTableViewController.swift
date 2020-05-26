@@ -36,7 +36,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         } else {
             // Do something
             let readAction = SwipeAction(style: .destructive, title: "Read") { (action, indexPath) in
-                self.updateModel(at: indexPath)
+                print("아이템 읽기 완료.")
                 
             }
             
